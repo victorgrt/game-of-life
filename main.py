@@ -1,8 +1,9 @@
 import time
+from loading import load_game_of_life
 import pygame
 import numpy as np
 
-COLOR_BG = (10, 10, 10,)
+COLOR_BG = (10, 10, 10)
 COLOR_GRID = (0, 177, 64)
 COLOR_DIE_NEXT = (0,157, 44)
 COLOR_ALIVE_NEXT = (0, 197, 84)
@@ -177,7 +178,7 @@ def update(screen, cells, size, with_progress=False):
 def main():
     pygame.init()
     screen = pygame.display.set_mode((1000, 830))
-
+    load_game_of_life(screen)
     cells = np.zeros((80, 100))
     screen.fill(COLOR_BG)
     update(screen, cells, 10)
@@ -214,21 +215,6 @@ def main():
                     serpent(cells)
                 elif Q.key == pygame.K_h:
                     heart(cells)
-                elif Q.key == pygame.K_v:
-                    pos = pygame.mouse.get_pos()
-                    x, y = pos[1] // 10, pos[0] // 10
-                    cells[x, y+1] = 1
-                    cells[x, y+4] = 1
-                    cells[x+1, y] = 1
-                    cells[x+1, y+4] = 1
-                    cells[x+2, y+2] = 1
-                    cells[x+2, y+3] = 1
-                    cells[x+2, y+4] = 1
-                    cells[x+2, y+5] = 1
-                    cells[x+3, y+1] = 1
-                    cells[x+3, y+4] = 1
-                    update(screen, cells, 10)
-                    pygame.display.update()
                 elif Q.key == pygame.K_q or Q.key == pygame.K_ESCAPE:
                     pygame.quit()
                     return
