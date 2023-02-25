@@ -85,9 +85,11 @@ def clignotant(cells):
     pos = pygame.mouse.get_pos()
     x = pos[0] // 10
     y = pos[1] // 10
-    cells[x, y] = 1
-    cells[x, y+1] = 1
-    cells[x, y+2] = 1
+
+    clignotant_coords = [(1, 1), (1, 2), (1, 3)]
+
+    for coord in clignotant_coords:
+        cells[y + coord[0], x + coord[1]] = 1
 
 def pulsar(cells):
     pos = pygame.mouse.get_pos()
@@ -199,21 +201,21 @@ def main():
             elif Q.type == pygame.KEYDOWN:
                 if Q.key == pygame.K_SPACE:
                     running = not running
-                elif Q.key == pygame.K_g:
+                elif Q.key == pygame.K_1:
                     glider(cells)
-                elif Q.key == pygame.K_p:
+                elif Q.key == pygame.K_2:
                     pulsar(cells)
-                elif Q.key == pygame.K_o:
+                elif Q.key == pygame.K_3:
                     clignotant(cells)
-                elif Q.key == pygame.K_c:
+                elif Q.key == pygame.K_4:
                     gosper_glider_gun(cells) 
-                elif Q.key == pygame.K_b:
+                elif Q.key == pygame.K_5:
                     beehive(cells)
-                elif Q.key == pygame.K_m:
+                elif Q.key == pygame.K_6:
                     middleweight_spaceship(cells)
-                elif Q.key == pygame.K_s:
+                elif Q.key == pygame.K_7:
                     serpent(cells)
-                elif Q.key == pygame.K_h:
+                elif Q.key == pygame.K_8:
                     heart(cells)
                 elif Q.key == pygame.K_q or Q.key == pygame.K_ESCAPE:
                     pygame.quit()
