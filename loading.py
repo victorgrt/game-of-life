@@ -14,7 +14,7 @@ def load_game_of_life(screen):
     SCREEN_HEIGHT = 830
 
     # Charger l'image de fond
-    background_image = pygame.image.load("conway.jpg")
+    background_image = pygame.image.load("loading2.png")
     background_image = pygame.transform.scale(background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
     background_rect = background_image.get_rect()
     background_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
@@ -33,6 +33,10 @@ def load_game_of_life(screen):
     enter_text = font.render("Appuyez sur Entrer pour continuer", True, WHITE)
     enter_rect = enter_text.get_rect()
     enter_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 370)
+
+    blink = True
+    blink_duration = 500  # Durée d'affichage du texte en ms
+    last_blink_time = pygame.time.get_ticks()
 
     # Créer une animation de points tournants
     point_size = 10
@@ -72,18 +76,20 @@ def load_game_of_life(screen):
                     pygame.quit()
                     return
 
-        # Fond noir
-        #screen.fill(BLACK)
-
         # Affichage d'une animation
         time = pygame.time.get_ticks()  # Récupération du temps écoulé depuis le début de la boucle
-        angle = np.sin(time / 1000) * 45  # Calcul de l'angle de rotation en fonction du temps
         pygame.draw.rect(screen, WHITE, (SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 50, 80, 80))  # Dessin d'un carré blanc
-        rotated_rect = pygame.transform.rotate(background_image, angle)  # Rotation du carré
-        screen.blit(rotated_rect, rotated_rect.get_rect(center=background_rect.center)) # Affichage du carré
+        #rotated_rect = pygame.transform.rotate(background_image, angle)  # Rotation du carré
+        #screen.blit(rotated_rect, rotated_rect.get_rect(center=background_rect.center)) # Affichage du carré
 
         # Affichage des textes
-        screen.blit(enter_text, enter_rect)
+        screen.blit(background_image, (0, 0))
+        if pygame.time.get_ticks() - last_blink_time > blink_duration:
+            blink = not blink
+            last_blink_time = pygame.time.get_ticks()
+        if blink:
+            screen.blit(enter_text, enter_rect)
+
 
         # Rafraîchissement de l'écran
         pygame.display.flip()
