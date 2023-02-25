@@ -118,6 +118,17 @@ def beehive(cells):
         cells[y + coord[0], x + coord[1]] = 1
 
 
+def penta(cells):
+    pos = pygame.mouse.get_pos()
+    x = pos[0] // 10
+    y = pos[1] // 10
+    
+    # Placer la ruche
+    penta_coords = [(0, -4), (0, -3), (0, -2), (0, -1), (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5)]
+    
+    for coord in penta_coords:
+        cells[y + coord[0], x + coord[1]] = 1
+
 def middleweight_spaceship(cells):
     pos = pygame.mouse.get_pos()
     x = pos[0] // 10
@@ -139,6 +150,18 @@ def serpent(cells):
     serpent_coords = [(0, 0), (0, 1), (0, 2), (0, 3), (1, 3), (1, 4), (1, 5), (2, 5), (2, 6), (2, 7), (3, 7), (3, 8), (3, 9), (4, 9), (4, 10), (4, 11), (5, 11), (5, 12), (5, 13), (6, 13), (6, 14), (6, 15), (7, 15), (7, 16), (7, 17), (8, 17), (8, 18), (8, 19)]
     
     for coord in serpent_coords:
+        cells[y + coord[0], x + coord[1]] = 1
+
+
+def t_bordel(cells):
+    pos = pygame.mouse.get_pos()
+    x = pos[0] // 10
+    y = pos[1] // 10
+    
+    # Placer le serpent
+    bordel_coords = [(0, 2), (0, 3), (1, 1), (1, 2), (2, 2)]
+    
+    for coord in bordel_coords:
         cells[y + coord[0], x + coord[1]] = 1
 
 
@@ -219,9 +242,11 @@ def main():
                 elif Q.key == pygame.K_6:
                     middleweight_spaceship(cells)
                 elif Q.key == pygame.K_7:
-                    serpent(cells)
+                    t_bordel(cells)
                 elif Q.key == pygame.K_8:
                     heart(cells)
+                elif Q.key == pygame.K_9:
+                    penta(cells)
                 elif Q.key == pygame.K_q or Q.key == pygame.K_ESCAPE:
                     pygame.quit()
                     return
