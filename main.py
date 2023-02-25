@@ -1,4 +1,5 @@
 import time
+from affichage import display_patterns
 from loading import load_game_of_life
 import pygame
 import numpy as np
@@ -11,6 +12,9 @@ COLOR_TEXT = (255, 255, 255)
 
 pygame.init()
 pygame.display.set_caption("THE GAME OF LIFE")
+
+def count_dead_cells(cells):
+    return np.sum(cells == 0)
 
 def display_info(screen, generation, alive_cells, dead_cells):
     font = pygame.font.SysFont("Hubot Sans", 40)
@@ -181,6 +185,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((1000, 830))
     load_game_of_life(screen)
+    display_patterns(screen)
     cells = np.zeros((80, 100))
     screen.fill(COLOR_BG)
     update(screen, cells, 10)
@@ -191,7 +196,7 @@ def main():
     running = False
     generation = 0
     alive_cells = 0
-    dead_cells = 8000
+    dead_cells = 0
 
     while True:
         for Q in pygame.event.get():
@@ -240,11 +245,13 @@ def main():
         if running:
             cells = update(screen, cells, 10, with_progress=True)
             generation += 1
+            dead_cells = count_dead_cells(cells)
+            alive_cells = np.sum(cells == 1)
 
             if np.count_nonzero(cells) == 0:
                 running = False
 
-            display_info(screen, generation, np.count_nonzero(cells), 8000 - np.count_nonzero(cells))
+            display_info(screen, generation, np.count_nonzero(cells), dead_cells)
             pygame.display.update()
         
         #print(pygame.font.get_fonts())

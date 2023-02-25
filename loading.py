@@ -27,7 +27,7 @@ def load_game_of_life(screen):
     GRAY = (128, 128, 128)
 
     # Police de caractères pour le texte
-    font = pygame.font.SysFont('Arial', 50)
+    font = pygame.font.SysFont('Hubot Sans', 50)
 
     # Texte "Appuyez sur Entrer pour continuer"
     enter_text = font.render("Appuyez sur Entrer pour continuer", True, WHITE)
