@@ -1,6 +1,6 @@
 import time
-from affichage import display_patterns
 from loading import load_game_of_life
+from info import display_rules
 import pygame
 import numpy as np
 
@@ -21,10 +21,12 @@ def display_info(screen, generation, alive_cells, dead_cells):
     text_generation = font.render("Generation: " + str(generation), True, COLOR_TEXT)
     text_alive = font.render("Alive cells: " + str(alive_cells), True, COLOR_TEXT)
     text_dead = font.render("Dead cells: " + str(dead_cells), True, COLOR_TEXT)
+    text_info = font.render("Press R for infos", True, COLOR_TEXT)
 
     screen.blit(text_generation, (10, 800))
     screen.blit(text_alive, (260, 800))
     screen.blit(text_dead, (520, 800))
+    screen.blit(text_info, (780, 800))
 
     pygame.display.update()
 
@@ -208,7 +210,6 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((1000, 830))
     load_game_of_life(screen)
-    display_patterns(screen)
     cells = np.zeros((80, 100))
     screen.fill(COLOR_BG)
     update(screen, cells, 10)
@@ -217,6 +218,7 @@ def main():
     pygame.display.update()
 
     running = False
+    displaying_rules = False
     generation = 0
     alive_cells = 0
     dead_cells = 0
@@ -229,6 +231,9 @@ def main():
             elif Q.type == pygame.KEYDOWN:
                 if Q.key == pygame.K_SPACE:
                     running = not running
+                elif Q.key == pygame.K_q or Q.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    return
                 elif Q.key == pygame.K_1:
                     glider(cells)
                 elif Q.key == pygame.K_2:
@@ -247,11 +252,16 @@ def main():
                     heart(cells)
                 elif Q.key == pygame.K_9:
                     penta(cells)
-                elif Q.key == pygame.K_q or Q.key == pygame.K_ESCAPE:
-                    pygame.quit()
-                    return
-                update(screen, cells, 10)
-                pygame.display.update()
+                elif Q.key == pygame.K_r:
+                    displaying_rules = not displaying_rules
+                    
+
+        if displaying_rules:
+            running = False
+            display_rules(screen)
+        else:
+            update(screen, cells, 10)
+            pygame.display.update()
             if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
                 if pygame.key.get_pressed()[pygame.K_LSHIFT]:

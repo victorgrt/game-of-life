@@ -68,7 +68,7 @@ def display_patterns(screen):
                     return
 
         # Fond noir
-        screen.fill(BLACK)
+        #screen.fill(BLACK)
 
         # Affichage des textes
         screen.blit(patterns_text, patterns_rect)
