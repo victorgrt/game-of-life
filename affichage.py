@@ -16,7 +16,7 @@ def display_patterns(screen):
     font = pygame.font.SysFont('Hubot Sans', 50)
 
     # Texte "Patterns"
-    patterns_text = font.render("""Pour directement faire spawn un de ces patterns, appuyez sur la touche correspondante""", True, WHITE)
+    patterns_text = font.render('''Pour directement faire spawn un de ces patterns, appuyez sur la touche correspondante''', True, WHITE)
     patterns_rect = patterns_text.get_rect()
     patterns_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 300)
 
