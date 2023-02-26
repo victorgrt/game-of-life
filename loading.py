@@ -2,9 +2,6 @@ import pygame
 import sys
 import numpy as np
 
-import pygame
-import sys
-
 def load_game_of_life(screen):
     # Initialisation de Pygame
     pygame.init()
@@ -14,7 +11,7 @@ def load_game_of_life(screen):
     SCREEN_HEIGHT = 830
 
     # Charger l'image de fond
-    background_image = pygame.image.load("loading2.png")
+    background_image = pygame.image.load("tittlescreen.png")
     background_image = pygame.transform.scale(background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
     background_rect = background_image.get_rect()
     background_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
