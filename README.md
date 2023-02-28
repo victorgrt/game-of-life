@@ -30,6 +30,10 @@
 
 <p>Pour exécuter le jeu de la vie de Conway, vous pouvez utiliser une implémentation de référence dans le langage de programmation de votre choix. Dans ce référentiel, vous trouverez une implémentation Python simple du jeu de la vie de Conway.</p>
 
+<p>Pour que mon programme marche vous allez avoir besoin de la librairie <strong>pygame</strong>. Pour l'installer, utilisez la commande suivante (Linux)</p>
+
+<pre><code>pip install pygame</code></pre>
+
 <p>Pour l'exécuter, assurez-vous d'avoir Python 3.x installé et exécutez simplement :</p>
 
 <pre><code>python main.py</code></pre>
